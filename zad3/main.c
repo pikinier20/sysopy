@@ -44,6 +44,7 @@ int main(int argc, char **argv){
             endptr = NULL;
             long table_size = strtol(argv[inc+1],&endptr,10);
             if(errno == 0 && !*endptr){ // If errno is 0 and endptr is still set to NULL then number is valid
+                if(base_array != NULL) free(base_array);
                 base_array = create(table_size);
                 if(base_array == NULL){
                     printf("Provided size is less or equal 0\n");
