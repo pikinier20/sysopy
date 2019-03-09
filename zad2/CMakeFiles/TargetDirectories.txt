@@ -1,0 +1,4 @@
+/home/user/sysopy/zad2/CMakeFiles/rebuild_cache.dir
+/home/user/sysopy/zad2/CMakeFiles/edit_cache.dir
+/home/user/sysopy/zad2/CMakeFiles/mylib.dir
+/home/user/sysopy/zad2/CMakeFiles/zad2.dir
