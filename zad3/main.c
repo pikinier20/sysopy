@@ -36,6 +36,7 @@ int main(int argc, char **argv){
     clock_t global_real_end_time;
     global_real_start_time = times(global_start_time);
     int inc = 1;
+    printf("\t\tReal\t\tUser\t\tSystem\n");
     while(inc < argc){
         real_start_time = times(start_time);
         if(strcmp(argv[inc],"create_table") == 0 && inc+1 < argc){
@@ -48,7 +49,8 @@ int main(int argc, char **argv){
                     printf("Provided size is less or equal 0\n");
                 }
                 else{
-                    printf("Table created successfully.\n");
+                    //printf("Table created successfully.\n");
+                    printf("create\t");
                 }
                 inc+=2;
             }
@@ -60,7 +62,8 @@ int main(int argc, char **argv){
         else if(strcmp(argv[inc],"search_directory") == 0){
             temporary_file_name = find_file(argv[inc+1],argv[inc+2],argv[inc+3]);
             if(temporary_file_name != NULL){
-                printf("Find command completed. Results saved to file.\n");
+                //printf("Find command completed. Results saved to file. Any error saved to error.log\n");
+                printf("find\t");
             }
             else{
                 printf("Error during command execution. Bad arguments. \n");
@@ -75,7 +78,8 @@ int main(int argc, char **argv){
             if(errno == 0 && !*endptr){
                 int result = delete_block_at_index(base_array, (int) index);
                 if(result == 0){
-                    printf("Deleted block no. %d .  \n",index);
+                    //printf("Deleted block no. %d .  \n",index);
+                    printf("delete\t");
                 }
                 else{
                     printf("Error during deleting block. Index out of range or NaN or table doesn't exist \n");
@@ -92,7 +96,8 @@ int main(int argc, char **argv){
             if(index != -1){
                 int result = add_block_at_index(base_array,argv[inc+1],index);
                 if(result != -1){
-                    printf("File saved at index no. %d \n",result);
+                    printf("save\t");
+                    //printf("File saved at index no. %d \n",result);
                 }
                 else{
                     printf("Error during saving file. Probably file doesn't exist \n");
@@ -105,19 +110,21 @@ int main(int argc, char **argv){
             inc+=2;
         }
         else{
-            printf("Ommited argument no. %d , because it's not a valid command \n",inc+1);
-            inc++;
+            printf("Argument no. %d is not a valid command. Terminating... \n",inc+1);
+            inc = argc;
         }
         real_end_time = times(end_time);
-        printf("Real\t\tUser\t\tSystem\n");
+        //printf("\tReal\t\tUser\t\tSystem\n");
         printf("%lf\t",calculate_time(real_start_time,real_end_time));
         printf("%lf\t",calculate_time(start_time->tms_cutime,end_time->tms_cutime));
         printf("%lf\n",calculate_time(start_time->tms_cstime,end_time->tms_cstime));
     }
     global_real_end_time = times(global_end_time);
-    printf("\n Global times \n");
-    printf("Real\t\tUser\t\tSystem\n");
+    //printf("Global times \n");
+    printf("global\t");
+    //printf("Real\t\tUser\t\tSystem\n");
     printf("%lf\t",calculate_time(global_real_start_time,global_real_end_time));
     printf("%lf\t",calculate_time(global_start_time->tms_cutime,global_end_time->tms_cutime));
-    printf("%lf\n",calculate_time(global_start_time->tms_cstime,global_end_time->tms_cstime));
+    printf("%lf\n\n\n",calculate_time(global_start_time->tms_cstime,global_end_time->tms_cstime));
+    return 0;
 }

@@ -67,6 +67,17 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/local/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -111,30 +122,69 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named mylib
+# Target rules for targets named zad2shared
 
 # Build rule for target.
-mylib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 mylib
-.PHONY : mylib
+zad2shared: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zad2shared
+.PHONY : zad2shared
 
 # fast build rule for target.
-mylib/fast:
-	$(MAKE) -f CMakeFiles/mylib.dir/build.make CMakeFiles/mylib.dir/build
-.PHONY : mylib/fast
+zad2shared/fast:
+	$(MAKE) -f CMakeFiles/zad2shared.dir/build.make CMakeFiles/zad2shared.dir/build
+.PHONY : zad2shared/fast
 
 #=============================================================================
-# Target rules for targets named zad2
+# Target rules for targets named zad2dynamic
 
 # Build rule for target.
-zad2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 zad2
-.PHONY : zad2
+zad2dynamic: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zad2dynamic
+.PHONY : zad2dynamic
 
 # fast build rule for target.
-zad2/fast:
-	$(MAKE) -f CMakeFiles/zad2.dir/build.make CMakeFiles/zad2.dir/build
-.PHONY : zad2/fast
+zad2dynamic/fast:
+	$(MAKE) -f CMakeFiles/zad2dynamic.dir/build.make CMakeFiles/zad2dynamic.dir/build
+.PHONY : zad2dynamic/fast
+
+#=============================================================================
+# Target rules for targets named sharedlib
+
+# Build rule for target.
+sharedlib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sharedlib
+.PHONY : sharedlib
+
+# fast build rule for target.
+sharedlib/fast:
+	$(MAKE) -f CMakeFiles/sharedlib.dir/build.make CMakeFiles/sharedlib.dir/build
+.PHONY : sharedlib/fast
+
+#=============================================================================
+# Target rules for targets named zad2static
+
+# Build rule for target.
+zad2static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zad2static
+.PHONY : zad2static
+
+# fast build rule for target.
+zad2static/fast:
+	$(MAKE) -f CMakeFiles/zad2static.dir/build.make CMakeFiles/zad2static.dir/build
+.PHONY : zad2static/fast
+
+#=============================================================================
+# Target rules for targets named staticlib
+
+# Build rule for target.
+staticlib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 staticlib
+.PHONY : staticlib
+
+# fast build rule for target.
+staticlib/fast:
+	$(MAKE) -f CMakeFiles/staticlib.dir/build.make CMakeFiles/staticlib.dir/build
+.PHONY : staticlib/fast
 
 main.o: main.c.o
 
@@ -142,7 +192,8 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) -f CMakeFiles/zad2.dir/build.make CMakeFiles/zad2.dir/main.c.o
+	$(MAKE) -f CMakeFiles/zad2shared.dir/build.make CMakeFiles/zad2shared.dir/main.c.o
+	$(MAKE) -f CMakeFiles/zad2static.dir/build.make CMakeFiles/zad2static.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -151,7 +202,8 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) -f CMakeFiles/zad2.dir/build.make CMakeFiles/zad2.dir/main.c.i
+	$(MAKE) -f CMakeFiles/zad2shared.dir/build.make CMakeFiles/zad2shared.dir/main.c.i
+	$(MAKE) -f CMakeFiles/zad2static.dir/build.make CMakeFiles/zad2static.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -160,8 +212,36 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) -f CMakeFiles/zad2.dir/build.make CMakeFiles/zad2.dir/main.c.s
+	$(MAKE) -f CMakeFiles/zad2shared.dir/build.make CMakeFiles/zad2shared.dir/main.c.s
+	$(MAKE) -f CMakeFiles/zad2static.dir/build.make CMakeFiles/zad2static.dir/main.c.s
 .PHONY : main.c.s
+
+main_dynamic.o: main_dynamic.c.o
+
+.PHONY : main_dynamic.o
+
+# target to build an object file
+main_dynamic.c.o:
+	$(MAKE) -f CMakeFiles/zad2dynamic.dir/build.make CMakeFiles/zad2dynamic.dir/main_dynamic.c.o
+.PHONY : main_dynamic.c.o
+
+main_dynamic.i: main_dynamic.c.i
+
+.PHONY : main_dynamic.i
+
+# target to preprocess a source file
+main_dynamic.c.i:
+	$(MAKE) -f CMakeFiles/zad2dynamic.dir/build.make CMakeFiles/zad2dynamic.dir/main_dynamic.c.i
+.PHONY : main_dynamic.c.i
+
+main_dynamic.s: main_dynamic.c.s
+
+.PHONY : main_dynamic.s
+
+# target to generate assembly for a file
+main_dynamic.c.s:
+	$(MAKE) -f CMakeFiles/zad2dynamic.dir/build.make CMakeFiles/zad2dynamic.dir/main_dynamic.c.s
+.PHONY : main_dynamic.c.s
 
 mylib.o: mylib.c.o
 
@@ -169,7 +249,8 @@ mylib.o: mylib.c.o
 
 # target to build an object file
 mylib.c.o:
-	$(MAKE) -f CMakeFiles/mylib.dir/build.make CMakeFiles/mylib.dir/mylib.c.o
+	$(MAKE) -f CMakeFiles/sharedlib.dir/build.make CMakeFiles/sharedlib.dir/mylib.c.o
+	$(MAKE) -f CMakeFiles/staticlib.dir/build.make CMakeFiles/staticlib.dir/mylib.c.o
 .PHONY : mylib.c.o
 
 mylib.i: mylib.c.i
@@ -178,7 +259,8 @@ mylib.i: mylib.c.i
 
 # target to preprocess a source file
 mylib.c.i:
-	$(MAKE) -f CMakeFiles/mylib.dir/build.make CMakeFiles/mylib.dir/mylib.c.i
+	$(MAKE) -f CMakeFiles/sharedlib.dir/build.make CMakeFiles/sharedlib.dir/mylib.c.i
+	$(MAKE) -f CMakeFiles/staticlib.dir/build.make CMakeFiles/staticlib.dir/mylib.c.i
 .PHONY : mylib.c.i
 
 mylib.s: mylib.c.s
@@ -187,7 +269,8 @@ mylib.s: mylib.c.s
 
 # target to generate assembly for a file
 mylib.c.s:
-	$(MAKE) -f CMakeFiles/mylib.dir/build.make CMakeFiles/mylib.dir/mylib.c.s
+	$(MAKE) -f CMakeFiles/sharedlib.dir/build.make CMakeFiles/sharedlib.dir/mylib.c.s
+	$(MAKE) -f CMakeFiles/staticlib.dir/build.make CMakeFiles/staticlib.dir/mylib.c.s
 .PHONY : mylib.c.s
 
 # Help Target
@@ -197,12 +280,19 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... edit_cache"
-	@echo "... mylib"
-	@echo "... zad2"
+	@echo "... zad2shared"
+	@echo "... zad2dynamic"
+	@echo "... sharedlib"
+	@echo "... zad2static"
+	@echo "... staticlib"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... main_dynamic.o"
+	@echo "... main_dynamic.i"
+	@echo "... main_dynamic.s"
 	@echo "... mylib.o"
 	@echo "... mylib.i"
 	@echo "... mylib.s"

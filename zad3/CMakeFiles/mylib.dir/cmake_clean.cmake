@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/mylib.dir/mylib.c.o"
-  "libmylib.pdb"
-  "libmylib.so"
+  "mylib.pdb"
+  "mylib.so"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -6,3 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/home/user/sysopy/zad3/main_dynamic.c
+dlfcn.h
+-
+stdio.h
+-
+time.h
+-
+stdlib.h
+-
+sys/times.h
+-
+string.h
+-
+zconf.h
+-
+errno.h
+-
+mylib.h
+/home/user/sysopy/zad3/mylib.h
+
+/home/user/sysopy/zad3/mylib.h
+

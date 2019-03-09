@@ -200,11 +200,8 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Library linking
-Lib:BOOL=SHARED
-
 //Optimalization
-Opti:BOOL=O3
+Opti:BOOL=Os
 
 //Value Computed by CMake
 main_BINARY_DIR:STATIC=/home/user/sysopy/zad3

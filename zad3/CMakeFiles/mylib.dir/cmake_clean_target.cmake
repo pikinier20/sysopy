@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "libmylib.a"
+  "mylib.a"
 )

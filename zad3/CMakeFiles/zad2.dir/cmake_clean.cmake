@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/zad2.dir/main.c.o"
+  "CMakeFiles/zad2.dir/main_dynamic.c.o"
   "zad2.pdb"
   "zad2"
 )
