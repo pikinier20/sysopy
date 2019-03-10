@@ -1,0 +1,51 @@
+Start testing: Mar 09 19:24 CET
+----------------------------------------------------------
+Unable to find executable: zad2
+1/3 Testing: HardTest
+1/3 Test: HardTest
+Command: "" "create_table" "10" "search_directory" "/" "main.c" "temp" "save_search" "temp" "remove_block" "0" "save_search" "temp" "remove_block" "0" "save_search" "temp" "save_search" "temp" "remove_block" "0" "remove_block" "1"
+Directory: /home/user/sysopy/zad3
+"HardTest" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"HardTest" end time: Mar 09 19:24 CET
+"HardTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: zad2
+2/3 Testing: MediumTest
+2/3 Test: MediumTest
+Command: "" "create_table" "10" "search_directory" "home" "main.c" "temp" "save_search" "temp" "remove_block" "0" "save_search" "temp" "remove_block" "0" "save_search" "temp" "save_search" "temp" "remove_block" "0" "remove_block" "1"
+Directory: /home/user/sysopy/zad3
+"MediumTest" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MediumTest" end time: Mar 09 19:24 CET
+"MediumTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: zad2
+3/3 Testing: EasyTest
+3/3 Test: EasyTest
+Command: "" "create_table" "10" "search_directory" "." "main.c" "temp" "save_search" "temp" "remove_block" "0" "save_search" "temp" "remove_block" "0" "save_search" "temp" "save_search" "temp" "remove_block" "0" "remove_block" "1"
+Directory: /home/user/sysopy/zad3
+"EasyTest" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"EasyTest" end time: Mar 09 19:24 CET
+"EasyTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 09 19:24 CET

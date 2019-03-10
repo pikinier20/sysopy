@@ -201,7 +201,7 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Optimalization
-Opti:BOOL=Os
+Opti:BOOL=OFF
 
 //Value Computed by CMake
 main_BINARY_DIR:STATIC=/home/user/sysopy/zad3
