@@ -18,5 +18,7 @@ char* find_file(char* dir, char* file, char* name_file_temp);
 
 char* load_file(char* path);
 
+void free_memory(struct wrapped_array* arr);
+
 
 #endif //MYLIB_H

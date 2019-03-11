@@ -65,5 +65,18 @@ char* load_file(char* path){
     return res_string;
 }
 
+void free_memory(struct wrapped_array* arr){
+    if(arr == NULL ) return;
+    if(arr->array != NULL){
+        int i = 0;
+        for(i = 0; i < arr->size; i++){
+            if(arr->array[i] != NULL) free(arr->array[i]);
+        }
+        free(arr->array);
+    }
+    free(arr);
+}
+
+
 
 
