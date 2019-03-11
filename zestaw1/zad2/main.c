@@ -23,7 +23,7 @@ int find_empty_index(wrapped_array* array){
 }
 
 int main(int argc, char **argv){
-    wrapped_array* base_array;
+    wrapped_array* base_array=NULL;
     char* temporary_file_name;
     char *endptr = NULL; // Used to strtol function call
     struct tms *global_start_time = malloc(sizeof(struct tms));

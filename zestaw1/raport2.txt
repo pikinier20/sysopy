@@ -1,0 +1,45 @@
+Operacja na malej liczbie podkatalogow: find . -name main.c > temp
+        Real            User            System
+find    0.050000        0.000000        0.000000
+global  0.050000        0.000000        0.000000
+
+Operacja na sredniej liczbie podkatalogow: find /tmp -name main.c > temp
+        Real            User            System
+find    0.050000        0.000000        0.000000
+global  0.050000        0.000000        0.000000
+
+Operacja na duzej liczbie podkatalogow: find / -name main.c > temp
+        Real            User            System
+find    2.280000        0.290000        0.350000
+global  2.280000        0.290000        0.350000
+
+Zapis i usuniecie malego bloku
+        Real            User            System
+save    0.010000        0.000000        0.000000
+delete  0.000000        0.000000        0.000000
+
+Zapis i usuniecie sredniego bloku
+        Real            User            System
+save    0.000000        0.000000        0.000000
+delete  0.000000        0.000000        0.000000
+
+Zapis i usuniecie duzego bloku
+        Real            User            System
+save    0.000000        0.000000        0.000000
+delete  0.000000        0.000000        0.000000
+
+Kilkakrotny zapis i usuniecie
+        Real            User            System
+create  0.000000        0.000000        0.000000
+save    0.000000        0.000000        0.000000
+delete  0.000000        0.000000        0.000000
+save    0.000000        0.000000        0.000000
+delete  0.000000        0.000000        0.000000
+save    0.000000        0.000000        0.000000
+delete  0.000000        0.000000        0.000000
+global  0.000000        0.000000        0.000000
+
+
+
+
+
