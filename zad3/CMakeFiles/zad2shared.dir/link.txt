@@ -1,1 +1,0 @@
-/usr/bin/cc   -rdynamic CMakeFiles/zad2shared.dir/main.c.o  -o zad2shared -Wl,-rpath,/home/user/sysopy/zad3 sharedlib.so 

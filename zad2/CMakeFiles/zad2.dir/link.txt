@@ -1,1 +1,0 @@
-/usr/bin/cc   -rdynamic CMakeFiles/zad2.dir/main.c.o  -o zad2 libmylib.a 

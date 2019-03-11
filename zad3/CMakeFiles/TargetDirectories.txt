@@ -1,8 +1,0 @@
-/home/user/sysopy/zad3/CMakeFiles/rebuild_cache.dir
-/home/user/sysopy/zad3/CMakeFiles/test.dir
-/home/user/sysopy/zad3/CMakeFiles/edit_cache.dir
-/home/user/sysopy/zad3/CMakeFiles/zad2shared.dir
-/home/user/sysopy/zad3/CMakeFiles/zad2dynamic.dir
-/home/user/sysopy/zad3/CMakeFiles/sharedlib.dir
-/home/user/sysopy/zad3/CMakeFiles/zad2static.dir
-/home/user/sysopy/zad3/CMakeFiles/staticlib.dir

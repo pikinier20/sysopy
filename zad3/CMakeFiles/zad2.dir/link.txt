@@ -1,1 +1,0 @@
-/usr/bin/cc   -rdynamic CMakeFiles/zad2.dir/main_dynamic.c.o  -o zad2 -Wl,-rpath,/home/user/sysopy/zad3 mylib.so -ldl 
