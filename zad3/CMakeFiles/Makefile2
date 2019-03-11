@@ -105,7 +105,7 @@ clean: CMakeFiles/zad2shared.dir/clean
 # Target rules for target CMakeFiles/zad2dynamic.dir
 
 # All Build rule for target.
-CMakeFiles/zad2dynamic.dir/all: CMakeFiles/sharedlib.dir/all
+CMakeFiles/zad2dynamic.dir/all:
 	$(MAKE) -f CMakeFiles/zad2dynamic.dir/build.make CMakeFiles/zad2dynamic.dir/depend
 	$(MAKE) -f CMakeFiles/zad2dynamic.dir/build.make CMakeFiles/zad2dynamic.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/user/sysopy/zad3/CMakeFiles --progress-num=5,6 "Built target zad2dynamic"
@@ -118,7 +118,7 @@ all: CMakeFiles/zad2dynamic.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/zad2dynamic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/sysopy/zad3/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/sysopy/zad3/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/zad2dynamic.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/sysopy/zad3/CMakeFiles 0
 .PHONY : CMakeFiles/zad2dynamic.dir/rule

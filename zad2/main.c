@@ -127,5 +127,9 @@ int main(int argc, char **argv){
     printf("%lf\t",calculate_time(global_real_start_time,global_real_end_time));
     printf("%lf\t",calculate_time(global_start_time->tms_cutime,global_end_time->tms_cutime));
     printf("%lf\n\n\n",calculate_time(global_start_time->tms_cstime,global_end_time->tms_cstime));
+    free(global_start_time);
+    free(global_end_time);
+    free(start_time);
+    free(end_time);
     return 0;
 }

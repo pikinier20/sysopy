@@ -79,7 +79,6 @@ zad2dynamic_EXTERNAL_OBJECTS =
 
 zad2dynamic: CMakeFiles/zad2dynamic.dir/main_dynamic.c.o
 zad2dynamic: CMakeFiles/zad2dynamic.dir/build.make
-zad2dynamic: sharedlib.so
 zad2dynamic: CMakeFiles/zad2dynamic.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/user/sysopy/zad3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable zad2dynamic"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/zad2dynamic.dir/link.txt --verbose=$(VERBOSE)

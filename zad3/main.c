@@ -23,7 +23,7 @@ int find_empty_index(wrapped_array* array){
 }
 
 int main(int argc, char **argv){
-    wrapped_array* base_array;
+    wrapped_array* base_array=NULL;
     char* temporary_file_name;
     char *endptr = NULL; // Used to strtol function call
     struct tms *global_start_time = malloc(sizeof(struct tms));
@@ -44,7 +44,9 @@ int main(int argc, char **argv){
             endptr = NULL;
             long table_size = strtol(argv[inc+1],&endptr,10);
             if(errno == 0 && !*endptr){ // If errno is 0 and endptr is still set to NULL then number is valid
-                if(base_array != NULL) free(base_array);
+                if(base_array != NULL){
+                    free(base_array);
+                }
                 base_array = create(table_size);
                 if(base_array == NULL){
                     printf("Provided size is less or equal 0\n");
@@ -127,5 +129,9 @@ int main(int argc, char **argv){
     printf("%lf\t",calculate_time(global_real_start_time,global_real_end_time));
     printf("%lf\t",calculate_time(global_start_time->tms_cutime,global_end_time->tms_cutime));
     printf("%lf\n\n\n",calculate_time(global_start_time->tms_cstime,global_end_time->tms_cstime));
+    free(global_start_time);
+    free(global_end_time);
+    free(start_time);
+    free(end_time);
     return 0;
 }

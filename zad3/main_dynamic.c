@@ -7,10 +7,14 @@
 #include <string.h>
 #include <zconf.h>
 #include <errno.h>
-#include "mylib.h"
 
 void *dl_handle; //Dynamic library handle
 
+struct wrapped_array {
+    int size;
+    char **array;
+}; // No dynamic loading of struct definition in C
+typedef struct wrapped_array wrapped_array;
 
 
 double calculate_time(clock_t start,clock_t end){
@@ -30,6 +34,10 @@ int find_empty_index(wrapped_array* array){
 int main(int argc, char **argv){
     printf("Using dynamic library\n");
     dl_handle = dlopen("./mylib.so", RTLD_LAZY);
+    if(dl_handle == NULL){
+        printf("Cannot find library mylib.so. Terminating...");
+        return -1;
+    }
 
     struct wrapped_array* (*dlcreate)();
     char* (*dlfind_file)();
@@ -41,7 +49,7 @@ int main(int argc, char **argv){
     dladd_block_at_index = dlsym(dl_handle,"add_block_at_index"); 
 
     
-    wrapped_array* base_array;
+    wrapped_array* base_array = NULL;
     char* temporary_file_name;
     char *endptr = NULL; // Used to strtol function call
     struct tms *global_start_time = malloc(sizeof(struct tms));
@@ -152,10 +160,10 @@ int main(int argc, char **argv){
     printf("%lf\t",calculate_time(global_start_time->tms_cutime,global_end_time->tms_cutime));
     printf("%lf\n\n\n",calculate_time(global_start_time->tms_cstime,global_end_time->tms_cstime));
 
-    // free(dlcreate);
-    // free(dlfind_file);
-    // free(dldelete_block_at_index);
-    // free(dladd_block_at_index); 
     dlclose(dl_handle);
+    free(global_start_time);
+    free(global_end_time);
+    free(start_time);
+    free(end_time);
     return 0;
 }
