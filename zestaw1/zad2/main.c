@@ -44,7 +44,7 @@ int main(int argc, char **argv){
             endptr = NULL;
             long table_size = strtol(argv[inc+1],&endptr,10);
             if(errno == 0 && !*endptr){ // If errno is 0 and endptr is still set to NULL then number is valid
-                if(base_array != NULL) free(base_array);
+                if(base_array != NULL) free_memory(base_array);
                 base_array = create(table_size);
                 if(base_array == NULL){
                     printf("Provided size is less or equal 0\n");
@@ -57,7 +57,7 @@ int main(int argc, char **argv){
             }
             else{
                 printf("Bad argument to create_table, expected table_size (integer)\n");
-                return -1;
+                inc = argc;
             }
         }
         else if(strcmp(argv[inc],"search_directory") == 0){
@@ -68,7 +68,7 @@ int main(int argc, char **argv){
             }
             else{
                 printf("Error during command execution. Bad arguments. \n");
-                return -1;
+                inc = argc;
             }
             inc+=4;
         }
@@ -89,7 +89,7 @@ int main(int argc, char **argv){
             }
             else{
                 printf("Index argument is not a number \n");
-                return -1;
+                inc = argc;
             }
         }
         else if(strcmp(argv[inc], "save_search") == 0 && inc+1 < argc){
@@ -102,7 +102,7 @@ int main(int argc, char **argv){
                 }
                 else{
                     printf("Error during saving file. Probably file doesn't exist \n");
-                    return -1;
+                    inc = argc;
                 }
             }
             else{
