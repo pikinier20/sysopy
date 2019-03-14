@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/user/sysopy/zestaw2/zad1/file_lib.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+limits.h
+-
+unistd.h
+-
+file_lib.h
+/home/user/sysopy/zestaw2/zad1/file_lib.h
+
+/home/user/sysopy/zestaw2/zad1/file_lib.h
+

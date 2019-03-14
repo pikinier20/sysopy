@@ -1,0 +1,5 @@
+/home/user/sysopy/zestaw2/zad1/CMakeFiles/rebuild_cache.dir
+/home/user/sysopy/zestaw2/zad1/CMakeFiles/edit_cache.dir
+/home/user/sysopy/zestaw2/zad1/CMakeFiles/main.dir
+/home/user/sysopy/zestaw2/zad1/CMakeFiles/file_lib.dir
+/home/user/sysopy/zestaw2/zad1/CMakeFiles/file_sys.dir
