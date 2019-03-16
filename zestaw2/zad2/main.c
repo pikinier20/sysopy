@@ -29,14 +29,15 @@ int main(int argc, char **argv){
     }
     op = argv[3][0];
     time_from_epoch = mktime(time_struct);
+    dirpath = realpath(dirpath,NULL);
     if(strcmp(argv[4],"first") == 0){
-        traverse_directory(realpath(dirpath,NULL));
+        traverse_directory(dirpath);
     }
     if(strcmp(argv[4],"second") == 0){
         nftw_wrapper(dirpath);
     }
 
-
+    free(dirpath);
     free(time_struct);
     return 0;
 }
