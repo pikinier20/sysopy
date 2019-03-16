@@ -23,6 +23,7 @@ int generate(char* path, int count, int size){
         tmp[size] = '\n';
         if(fwrite(tmp,sizeof(char),size+1,file) != size+1) return 1;
     }
+    free(tmp);
     fclose(file);
     fclose(random);
     return 0;
@@ -105,7 +106,7 @@ int main(int argc, char** argv){
     if(result == 1){
         printf("Error occured during file opening\n");
     } else if(result == -1){
-        printf("Error occured while reading a file");
+        printf("Error occured while reading a file\n");
     }
     times(real_end_time);
     printf("System time: %lf \n", calculate_time(real_start_time->tms_cstime,real_end_time->tms_cstime));
