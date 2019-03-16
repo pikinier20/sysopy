@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/user/sysopy/zestaw2/zad2/lib.h
+
+/home/user/sysopy/zestaw2/zad2/main.c
+stdio.h
+-
+time.h
+-
+stdlib.h
+-
+sys/times.h
+-
+string.h
+-
+zconf.h
+-
+errno.h
+-
+lib.h
+/home/user/sysopy/zestaw2/zad2/lib.h
+
