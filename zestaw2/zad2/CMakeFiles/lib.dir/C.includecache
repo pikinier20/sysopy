@@ -29,6 +29,8 @@ math.h
 -
 time.h
 -
+ftw.h
+-
 lib.h
 /home/user/sysopy/zestaw2/zad2/lib.h
 
