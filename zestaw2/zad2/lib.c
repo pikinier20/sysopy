@@ -28,11 +28,13 @@ char* get_file_type(int st_mode){
 
 int get_date_string(time_t time, char *buffer){
     struct tm *times = localtime(&time);
-    strftime(buffer, 256*sizeof(char), "%F", times);
+    strftime(buffer, 256*sizeof(char), "%c", times);
     return 0;
 }
-int get_full_path(char *filename, char *buffer){
-    if(realpath(filename,buffer) == NULL) return -1;
+int get_full_path(char *dirpath,char *filename, char *buffer){
+    if(realpath(dirpath,buffer) == NULL) return -1;
+    strcat(buffer,"/");
+    strcat(buffer,filename);
     return 0;
 }
 
@@ -75,7 +77,7 @@ void traverse_directory(char *dirpath){
         }
         get_date_string(buffer->st_mtime, modify_date);
         get_date_string(buffer->st_atime, access_date);
-        get_full_path(dirptr->d_name, path);
+        get_full_path(dirpath, dirptr->d_name, path);
         if(flag == 1){
             printf("%s\t%s\t%d\t%s\t%s\n",
                 path,
@@ -133,8 +135,5 @@ static int nftw_function(const char* fpath, const struct stat *file_stat, int ty
 }
 
 void nftw_wrapper(char *path){
-    char *buffer = malloc(256*sizeof(char));
-    get_full_path(path, buffer);
-    nftw(buffer, nftw_function, 10, FTW_PHYS);
-    free(buffer);
+    nftw(path, nftw_function, 10, FTW_PHYS);
 }
