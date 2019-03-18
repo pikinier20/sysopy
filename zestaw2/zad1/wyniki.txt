@@ -1,0 +1,116 @@
+Linie wielkosci 1 bajta:
+	Sortowanie:
+		-Biblioteki systemowe:
+			real    0m15.653s
+			user    0m1.349s
+			sys     0m14.070s
+		-Biblioteki standardowe:
+			real    0m1.846s
+			user    0m1.653s
+			sys     0m0.032s
+	Kopiowanie:
+		-Biblioteki systemowe:
+			real    0m0.010s
+			user    0m0.001s
+			sys     0m0.008s
+		-Bibioteki standardowe:
+			real    0m0.002s
+			user    0m0.001s
+			sys     0m0.000s
+Linie wielkosci 4 bajta:
+	Sortowanie:
+		-Bibioteki systemowe:
+			real    0m17.139s
+			user    0m1.341s
+			sys     0m15.534s
+		-Biblioteki standardowe:
+			real    0m2.393s
+			user    0m1.897s
+			sys     0m0.065s
+	Kopiowanie:
+		-Biblioteki systemowe:
+			real    0m0.009s
+			user    0m0.001s
+			sys     0m0.008s
+		-Biblioteki standardowe:
+			real    0m0.002s
+			user    0m0.001s
+			sys     0m0.000s
+Linie wielkosci 512 bajta:
+	Sortowanie:
+		-Biblioteki systemowe:
+			real    0m18.992s
+			user    0m1.369s
+			sys     0m16.891s
+		-Biblioteki standardowe:
+			real    0m6.539s
+			user    0m3.247s
+			sys     0m3.040s
+	Kopiowanie:
+		-Biblioteki systemowe:
+			real    0m0.051s
+			user    0m0.001s
+			sys     0m0.013s
+		-Biblioteki standardowe:
+			real    0m0.009s
+			user    0m0.002s
+			sys     0m0.005s
+Linie wielkosci 1024 bajta:
+	Sortowanie:
+		-Biblioteki systemowe:
+			real    0m21.038s
+			user    0m1.486s
+			sys     0m19.177s
+		-Biblioteki standardowe:
+			real    0m11.821s
+			user    0m4.504s
+			sys     0m6.866s
+	Kopiowanie:
+		-Biblioteki systemowe:
+			real    0m0.055s
+			user    0m0.000s
+			sys     0m0.018s
+		-Biblioteki standardowe:
+			real    0m0.057s
+			user    0m0.003s
+			sys     0m0.010s
+Linie wielkosci 4096 bajta:
+	Sortowanie:
+		-Biblioteki systemowe:
+			real    0m32.967s
+			user    0m1.519s
+			sys     0m30.953s
+		-Biblioteki standardowe:
+			real    0m39.807s
+			user    0m9.196s
+			sys     0m29.786s
+	Kopiowanie:
+		-Bibioteki systemowe:
+			real    0m0.096s
+			user    0m0.001s
+			sys     0m0.036s
+		-Bibioteki standardowe:
+			real    0m0.102s
+			user    0m0.001s
+			sys     0m0.038s
+Linie wielkosci 8192 bajta:
+	Sortowanie:
+		-Biblioteki systemowe:
+			real    0m50.300s
+			user    0m1.674s
+			sys     0m47.557s
+		-Biblioteki standardowe:
+			real    1m11.776s
+			user    0m10.795s
+			sys     0m59.475s
+	Kopiowanie:
+		-Bibioteki systemowe:
+			real    0m0.169s
+			user    0m0.000s
+			sys     0m0.070s
+		-Biblioteki standardowe:
+			real    0m0.174s
+			user    0m0.006s
+			sys     0m0.068s
+
+
