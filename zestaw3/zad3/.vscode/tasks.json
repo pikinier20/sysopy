@@ -1,0 +1,42 @@
+{
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "gcc/zadanie",
+      "command": "gcc",
+      "args": [
+        "${workspaceFolder}/zadanie3.c",
+        "-g",
+        "-o",
+        "${workspaceFolder}/program"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "cwd": "/usr/bin"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "gcc/tester",
+      "command": "gcc",
+      "args": [
+        "${workspaceFolder}/tester.c",
+        "-g",
+        "-o",
+        "${workspaceFolder}/tester",
+        "-lm"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "cwd": "/usr/bin"
+      }
+    },
+  ],
+  "version": "2.0.0"
+}
