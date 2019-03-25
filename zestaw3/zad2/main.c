@@ -20,18 +20,19 @@ struct Block {
 } Block;
 
 
-void copy(struct Block * block, char * destination) {
+int copy(struct Block * block, char * destination) {
     FILE * fd_d;
     char dest[100] = "./archiwum/";
     strcat(dest, destination);
     fd_d = fopen(dest, "w+");
-    if(fd_d < 0) {
-        printf("Error during file creation");
-        return;
+    if(fd_d == NULL) {
+        printf("Error during file creation \n");
+        return -1;
     } else {
-        fwrite(block->table, sizeof(char), block->size, fd_d);
+        if(fwrite(block->table, sizeof(char), block->size, fd_d) != block->size * sizeof(char)) return -1;
     }
     fclose(fd_d);
+    return 0;
 }
 struct Block *create_block(){
     struct Block *result = (struct Block*) calloc(1,sizeof(struct Block));
@@ -70,8 +71,14 @@ void cp(char * source, char * filename) {
 
 int child_process_in_memory(FILE * file, struct stat attr, char * filename, int seconds, int terminate_seconds) {
     struct Block *block = create_block();
-    copy_result_to_memory(block, filename);
-    stat(filename, &attr);
+    if(copy_result_to_memory(block, filename) != 0){
+        printf("%d Unable to copy file to memory. \n",getpid());
+        exit(0);
+    }
+    if(stat(filename, &attr) != 0){
+        printf("Cannot find file.\n");
+        exit(0);
+    }
     block->mod = attr.st_mtime;
     int count = 0, j = 0;
     char * tmpfilename = (char *) calloc (100, sizeof(char));
@@ -84,8 +91,14 @@ int child_process_in_memory(FILE * file, struct stat attr, char * filename, int 
             strcpy(tmpfilename, basename(filename));
             strftime(str, 100, format, localtime(&block->mod));
             strcat(tmpfilename, str);
-            copy(block, tmpfilename);
-            copy_result_to_memory(block, filename);
+            if(copy(block, tmpfilename) != 0){
+                printf("%d Unable to copy file to disc. \n",getpid());
+                exit(0);
+            }
+            if(copy_result_to_memory(block, filename) != 0){
+                printf("%d Unable to copy file to memory. \n",getpid());
+                exit(0);
+            }
             block->mod = attr.st_mtime;
             j++;
         }
@@ -100,7 +113,10 @@ int child_process_in_memory(FILE * file, struct stat attr, char * filename, int 
 
 int child_process_on_disc(FILE * file, struct stat attr, char * filename, int seconds, int terminate_seconds) {
     
-    stat(filename, &attr);
+    if(stat(filename, &attr) != 0){
+        printf("Cannot find file.\n");
+        exit(0);
+    }
     time_t mod = attr.st_mtime;
     int count = 0, j = 1;
     char tmpfilename[100];
@@ -137,10 +153,16 @@ int child_process_on_disc(FILE * file, struct stat attr, char * filename, int se
 }
 
 int main(int argc, char ** argv) {
-    if(argc != 4) return -1;
+    if(argc != 4){ 
+        printf("Expected 3 arguments\n");
+        return -1;
+    }
     FILE * file;
     file = fopen(argv[1], "r");
-    if(file == NULL) return -1;
+    if(file == NULL){ 
+        printf("Error while opening file\n");
+        return -1;
+    }
 
     char * filename = (char *) calloc (100, sizeof(char));
     int terminate_seconds;

@@ -98,8 +98,12 @@ int child_process_in_memory(FILE * file, struct stat attr, char * filename, int 
     struct Block *block = create_block();
     if(copy_result_to_memory(block, filename) != 0){
         printf("%d Unable to copy file to memory. \n",getpid());
+        exit(0);
     }
-    stat(filename, &attr);
+    if(stat(filename, &attr) != 0){
+        printf("Cannot find file.\n");
+        exit(0);
+    }
     block->mod = attr.st_mtime;
     int count = 0, j = 0;
     char * tmpfilename = (char *) calloc (100, sizeof(char));
@@ -114,9 +118,11 @@ int child_process_in_memory(FILE * file, struct stat attr, char * filename, int 
             strcat(tmpfilename, str);
             if(copy(block, tmpfilename) != 0){
                 printf("%d Unable to copy file to disc. \n",getpid());
+                exit(0);
             }
             if(copy_result_to_memory(block, filename) != 0){
                 printf("%d Unable to copy file to memory. \n",getpid());
+                exit(0);
             }
             block->mod = attr.st_mtime;
             j++;
@@ -132,7 +138,10 @@ int child_process_in_memory(FILE * file, struct stat attr, char * filename, int 
 
 int child_process_on_disc(FILE * file, struct stat attr, char * filename, int seconds, int terminate_seconds) {
     
-    stat(filename, &attr);
+    if(stat(filename, &attr) != 0){
+        printf("Cannot find file.\n");
+        exit(0);
+    }
     time_t mod = attr.st_mtime;
     int count = 0, j = 1;
     char tmpfilename[100];
@@ -170,7 +179,7 @@ int child_process_on_disc(FILE * file, struct stat attr, char * filename, int se
 
 int main(int argc, char ** argv) {
     if(argc != 6){ 
-        printf("Expected 6 arguments\n");
+        printf("Expected 5 arguments\n");
         return -1;
     }
     FILE * file;

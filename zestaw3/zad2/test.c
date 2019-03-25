@@ -18,7 +18,10 @@ int main(int argc, char ** argv) {
     if(argc != 5) return -1;
     FILE * file;
     file = fopen(argv[1], "a+");
-    if(file == NULL) return -1;
+    if(file == NULL) {
+        printf("Cannot open file\n");
+        return -1;
+    }
     int pmin, pmax, bytes;
     sscanf(argv[2], "%d", &pmin);
     sscanf(argv[3], "%d", &pmax);
