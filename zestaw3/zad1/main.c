@@ -1,9 +1,9 @@
+#define _XOPEN_SOURCE 500
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include <string.h>
 #include <sys/stat.h>
-#define __USE_XOPEN
 #include <time.h>
 #include <ftw.h>
 #include <linux/limits.h>
@@ -12,6 +12,7 @@
 #include <sys/wait.h>
 
 static int nftwsearch(const char *actualpath, const struct stat *buf, int ft, struct FTW *ftwbuf) {
+    if(ftwbuf->level == 0) return 0;
     pid_t child_pid;
     int s;
     if(ft == FTW_D) {
