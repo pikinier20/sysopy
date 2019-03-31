@@ -76,6 +76,7 @@ void set_count_handler(int mode){
             break;
         case 2:
             action.sa_sigaction = &count_function;
+            sigaddset(&action.sa_mask,SIGRTMIN+1);
             sigaction(SIGRTMIN,&action,NULL);
             break;
     }
