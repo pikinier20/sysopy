@@ -22,7 +22,6 @@ void sigtstp_function(int sig){
     }
     flag = (flag + 1) % 2;
     return;
-
 }
 
 void sigint_function(int sig){
