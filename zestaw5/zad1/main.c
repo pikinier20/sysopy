@@ -71,7 +71,7 @@ int main(int argc, char **argv){
                 exit(-1);
             }
             child_pids[i] = fork();
-            if(child_pids[i]){
+            if(child_pids[i] == 0){
                 if(i > 0){
                     dup2(prev_desc[0],STDIN_FILENO);
                     close(prev_desc[1]);
@@ -85,7 +85,7 @@ int main(int argc, char **argv){
                 execvp(programs[i][0],programs[i]);
                 exit(0);
             }
-            else if(pid > 0){
+            else if(child_pids[i] > 0){
                 if(i > 0){
                     close(prev_desc[0]);
                     close(prev_desc[1]);
@@ -96,7 +96,7 @@ int main(int argc, char **argv){
                 }
             }
         }
-        for(i = 0; i < arg_n; i++) waitpid(child_pids[i],&status,WIFEXITED(0));
+        for(i = 0; i < arg_n; i++) waitpid(child_pids[i],&status,0);
         if(fgets(buffer,512 * sizeof(char),file) == NULL) break;
 
     }
