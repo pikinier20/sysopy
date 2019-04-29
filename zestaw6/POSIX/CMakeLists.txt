@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.8.12)
+project(lab6)
+
+add_library(libChat chat.c)
+add_executable(server server.c chat.c)
+add_executable(client client.c chat.c)
+
+target_link_libraries(client libChat)
+find_library(LIBRT rt)
+if(LIBRT)
+    target_link_libraries(server ${LIBRT})
+    target_link_libraries(client ${LIBRT})
+endif()
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+set(CMAKE_C_FLAGS_RELEASE "-O2")
