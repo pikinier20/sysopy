@@ -79,7 +79,7 @@ int main() {
     act.sa_flags = 0;
     sigaction(SIGINT, &act, NULL);
 
-    if ((serverQueueID = mq_open(SERVER_NAME, O_RDONLY | O_CREAT | O_EXCL, 0666, &queue_attr)) == -1)
+    if ((serverQueueID = mq_open(SERVER_NAME, O_RDWR | O_CREAT | O_EXCL, 0666, &queue_attr)) == -1)
         raise_error("\033[1;31mSerwer:\033[0m Blad podczas tworzenia nowej kolejki \n");
 
     char content[MAX_MSG_LENGTH];
