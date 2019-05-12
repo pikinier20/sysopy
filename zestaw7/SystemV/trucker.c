@@ -12,6 +12,9 @@ int currAmount;
 int maxAmount;
 int maxWeight;
 int maxQuantity;
+Box box;
+int status;
+int semTaken = 0;
 
 char *nullptr = NULL;
 
@@ -52,8 +55,6 @@ int main(int argc, char **argv){
 }
 
 void loadBoxes(){
-    Box box;
-    int status;
     struct sembuf sops;
     sops.sem_flg = 0;
     while (1) {
@@ -65,6 +66,7 @@ void loadBoxes(){
         sops.sem_num = BELT;
         sops.sem_op = -1;
         if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad przy przywlaszczeniu semaforu BELT \n");
+        semTaken = 1;
 
         status = popBelt(fifo, &box);
         while(status == 0){
@@ -80,6 +82,7 @@ void loadBoxes(){
         sops.sem_num = BELT;
         sops.sem_op = 1;
         if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad przy oddawaniu semaforu BELT \n");
+        semTaken = 0;
 
         sops.sem_num = TRUCKER;
         sops.sem_op = 1;
@@ -120,6 +123,25 @@ void prepareSemaphores() {
 }
 
 void clearResources(void) {
+    if(!semTaken){
+        struct sembuf sops;
+        sops.sem_flg = 0;
+        sops.sem_num = BELT;
+        sops.sem_op = -1;
+        if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad przy przywlaszczeniu semaforu BELT \n");
+    }
+    status = popBelt(fifo, &box);
+    while(status == 0){
+        if(currAmount == maxAmount) {
+            log("Brak miejsca - nastepuje rozladowanie ciezarowki \n");
+            unloadTruck();
+        }
+        currAmount++;
+        log("Zaladowano na ciezarowke paczke o wadze: %d, pid: %d. Minelo %ld czasu od polozenia na tasmie. Pozostalo %d wolnych miejsc \n",
+        box.weight,box.pid,getMicroTime()-box.time,maxAmount-currAmount);
+        status = popBelt(fifo, &box);
+    }
+
     if (shmdt(fifo) == -1) {log("Blad podczas odlaczania pamieci wspoldzielonej od przestrzeni adresowej \n");}
     else log("Odlaczono pamiec wspoldzielona\n");
 

@@ -119,8 +119,8 @@ void prepareSemaphores() {
 }
 
 void freeResources(void) {
-    if (shmdt(belt) == -1) printf("Blad podczas odlaczania pamieci wspoldzielonej od przestrzeni adresowej\n");
-    else printf("Zasoby zostaly zwolnione\n");
+    if (shmdt(belt) == -1) {log("Blad podczas odlaczania pamieci wspoldzielonej od przestrzeni adresowej\n");}
+    else {log("Zasoby zostaly zwolnione\n");}
 }
 
 void intHandler(int signo) {

@@ -22,12 +22,13 @@ int main(int argc, char **argv){
         if(!(!*nullptr)) printf("Argument trzeci nie jest liczba \n");
     }
 
-    int i,pid,n,status;
+    int i,n,status;
     char nstring[100];
     char cyclestring[100];
+    int pid[workerNumber];
     for(i = 0; i < workerNumber; i++){
-        pid = fork();
-        if(pid == 0){
+        pid[i] = fork();
+        if(pid[i] == 0){
             srand(time(NULL) + getpid());
             n = (rand() % boxWeight) + 1;
             sprintf(nstring,"%d",n);
@@ -40,5 +41,6 @@ int main(int argc, char **argv){
             }
         }
     }
+    for(i = 0; i < workerNumber; i++) waitpid(pid[i],&status,0);
 }
 
