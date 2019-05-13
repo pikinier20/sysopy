@@ -66,6 +66,7 @@ void placeBox(Box box) {
             sops.sem_num = TRUCKER;
             sops.sem_op = 1;
             if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas budzenia truckera \n");
+            usleep(10000);
 
             sops.sem_num = BELT;
             sops.sem_op = 1;
@@ -90,6 +91,7 @@ void placeBox(Box box) {
         sops.sem_op = 1;
         if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas oddawania semaforu LOADERS \n");
         log("Polozono paczke o rozmiarze %d o czasie %ld \n",box.weight,box.time);
+        usleep(10000);
         
 
 
