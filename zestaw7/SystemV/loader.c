@@ -1,6 +1,6 @@
 #define _GNU_SOURCE
 #include "belt.h"
-#define log(format, ...) {printf("\033[1;31mLoader %d: \033[0m",getpid()); printf(format, ##__VA_ARGS__);}
+#define log(format, ...) {printf("\033[1;31m%ld.%.6ld Loader %d: \033[0m",getTime().tv_sec,getTime().tv_usec,getpid()); printf(format, ##__VA_ARGS__);}
 #define FAILURE_EXIT(code, format, ...) { log(format, ##__VA_ARGS__); exit(code);}
 
 Belt *belt = NULL;
@@ -62,36 +62,23 @@ void placeBox(Box box) {
 
         box.time = getMicroTime();
         if(pushBelt(belt,box) == -1){
-            log("Nie mozna polozyc paczki. Czekam na zwolnienie tasmy \n");
+            log("Nie mozna polozyc paczki. Budze truckera\n");
             sops.sem_num = TRUCKER;
             sops.sem_op = 1;
             if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas budzenia truckera \n");
-            usleep(10000);
-
             sops.sem_num = BELT;
             sops.sem_op = 1;
             if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas oddawania semaforu BELT \n");
-
-            sops.sem_num = TRUCKER;
-            sops.sem_op = -1;
-            if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas odbierania semaforu TRUCKER \n");
-
-
-            sops.sem_num = BELT;
-            sops.sem_op = -1;
-            if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas przywlaszczenia semaforu BELT \n");
-            box.time = getMicroTime();
-            if(pushBelt(belt,box) == -1) FAILURE_EXIT(3, "Blad podczas umieszczania paczki na tasmie \n");
         }
+        else{
+        log("Polozono paczke o rozmiarze %d o czasie %ld \n",box.weight,box.time);
         sops.sem_num = BELT;
         sops.sem_op = 1;
         if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas oddawania semaforu BELT \n");
-
         sops.sem_num = LOADERS;
         sops.sem_op = 1;
         if (semop(SID, &sops, 1) == -1) FAILURE_EXIT(3, "Blad podczas oddawania semaforu LOADERS \n");
-        log("Polozono paczke o rozmiarze %d o czasie %ld \n",box.weight,box.time);
-        usleep(10000);
+        }
         
 
 

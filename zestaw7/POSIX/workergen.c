@@ -30,14 +30,16 @@ int main(int argc, char **argv){
         pid[i] = fork();
         if(pid[i] == 0){
             srand(time(NULL) + getpid());
-            n = (rand() % boxWeight) + 1;
+            n = boxWeight;
             sprintf(nstring,"%d",n);
             if(cycles){
                 sprintf(cyclestring,"%d",cycleNumber);
                 if(execlp("./loader","./loader", nstring, cyclestring, NULL) == -1) FAILURE_EXIT(3,"Blad przy wykonywaniu funkcji exec \n");
+                exit(0);
             }
             else{
                 if(execlp("./loader","./loader", nstring, NULL) == -1) FAILURE_EXIT(3,"Blad przy wykonywaniu funkcji exec \n");
+                exit(0);
             }
         }
     }

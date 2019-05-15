@@ -1,6 +1,6 @@
 #define _XOPEN_SOURCE 500
 #include "belt.h"
-#define log(format, ...) {printf("\033[1;35mTrucker: \033[0m"); printf(format, ##__VA_ARGS__);}
+#define log(format, ...) {printf("\033[1;35m%ld.%.6ld Trucker: \033[0m",getTime().tv_sec,getTime().tv_usec); printf(format, ##__VA_ARGS__);}
 #define FAILURE_EXIT(code, format, ...) { log(format, ##__VA_ARGS__); exit(code);}
 
 Belt *fifo = NULL;
@@ -74,7 +74,7 @@ void loadBoxes(){
         }
         if (sem_post(belt_sem) == -1) FAILURE_EXIT(3, "Blad przy oddawaniu semaforu BELT \n");
 
-        if (sem_post(trucker_sem) == -1) FAILURE_EXIT(3, "Blad przy oddawaniu semaforu TRUCKER \n");
+        if (sem_post(loaders_sem) == -1) FAILURE_EXIT(3, "Blad przy oddawaniu semaforu TRUCKER \n");
     }
 
 }

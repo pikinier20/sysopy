@@ -1,6 +1,6 @@
 #define _GNU_SOURCE
 #include "belt.h"
-#define log(format, ...) {printf("\033[1;31mLoader %d: \033[0m",getpid()); printf(format, ##__VA_ARGS__);}
+#define log(format, ...) {printf("\033[1;31m%ld.%.6ld Loader %d: \033[0m",getTime().tv_sec,getTime().tv_usec,getpid()); printf(format, ##__VA_ARGS__);}
 #define FAILURE_EXIT(code, format, ...) { log(format, ##__VA_ARGS__); exit(code);}
 
 Belt *belt = NULL;
@@ -65,25 +65,18 @@ void placeBox(Box box) {
 
         box.time = getMicroTime();
         if(pushBelt(belt,box) == -1){
-            log("Nie mozna polozyc paczki. Czekam na zwolnienie tasmy \n");
+            log("Nie mozna polozyc paczki. Budze truckera \n");
 
-            if (sem_post(trucker_sem) == -1) FAILURE_EXIT(3, "Blad podczas budzenia truckera \n");
+            sem_post(trucker_sem);
 
-            usleep(10000);
-
-            if (sem_post(belt_sem) == -1) FAILURE_EXIT(3, "Blad podczas oddawania semaforu BELT \n");
-
-            if (sem_wait(trucker_sem) == -1) FAILURE_EXIT(3, "Blad podczas odbierania semaforu TRUCKER \n");
-
-            if (sem_wait(belt_sem) == -1) FAILURE_EXIT(3, "Blad podczas przywlaszczenia semaforu BELT \n");
-            box.time = getMicroTime();
-            if(pushBelt(belt,box) == -1) FAILURE_EXIT(3, "Blad podczas umieszczania paczki na tasmie \n");
+            sem_post(belt_sem);
         }
+        else{
+            log("Polozono paczke o rozmiarze %d o czasie %ld \n",box.weight,box.time);
         if (sem_post(belt_sem) == -1) FAILURE_EXIT(3, "Blad podczas oddawania semaforu BELT \n");
 
         if (sem_post(loaders_sem) == -1) FAILURE_EXIT(3, "Blad podczas oddawania semaforu LOADERS \n");
-        usleep(10000);
-        log("Polozono paczke o rozmiarze %d o czasie %ld \n",box.weight,box.time);
+        }
         
 
 

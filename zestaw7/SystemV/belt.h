@@ -17,6 +17,7 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 #include <sys/wait.h>
+#include <sys/time.h>
 
 #define PROJECT_ID 77
 
@@ -47,5 +48,7 @@ int popBelt(Belt *belt,Box *box);
 int pushBelt(Belt *belt, Box box);
 
 long getMicroTime();
+
+struct timeval getTime();
 
 #endif

@@ -62,3 +62,9 @@ long getMicroTime() {
     clock_gettime(CLOCK_MONOTONIC, &marker);
     return marker.tv_nsec / 1000;
 }
+
+struct timeval getTime(){
+    struct timeval timebuffer;
+    gettimeofday(&timebuffer, NULL);
+    return timebuffer;
+}

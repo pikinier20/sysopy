@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/mman.h>
+#include <sys/time.h>
 #include <semaphore.h>
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -56,5 +57,7 @@ int popBelt(Belt *belt,Box *box);
 int pushBelt(Belt *belt, Box box);
 
 long getMicroTime();
+
+struct timeval getTime();
 
 #endif
