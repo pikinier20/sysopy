@@ -66,7 +66,7 @@ struct timeval *thread_calculation_block(void *args){
     int x_end = (k + 1) * ceil(i_width / (1.0*thread_count)) - 1;
     for(i = x_start; i <= x_end; i++){
         for(j = 0; j < i_height; j++){
-            result[i][j] = calculate_pixel(i, j);
+            result[i][j] = abs(calculate_pixel(i, j));
         }
     }
     gettimeofday(end,NULL);
@@ -86,7 +86,7 @@ struct timeval *thread_calculation_interleaved(void *args){
     int i,j;
     for(i = k; i < i_width; i += thread_count){
         for(j = 0; j < i_height; j++){
-            result[i][j] = calculate_pixel(i, j);
+            result[i][j] = abs(calculate_pixel(i, j));
         }
     }
     gettimeofday(end,NULL);
@@ -113,7 +113,7 @@ int load_image(FILE* file){
     if(fscanf(file, "%d", &i_width) != 1) return 1;
     if(fscanf(file, "%d", &i_height) != 1) return 1;
     if(fscanf(file, "%d", &max_color) != 1) return 1;
-    if(max_color != 255) return 1;
+    if(max_color > 255) return 1;
 
     image = malloc(i_height * sizeof(char*));
     result = malloc(i_height * sizeof(char*));
