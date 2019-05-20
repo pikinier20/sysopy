@@ -62,8 +62,8 @@ struct timeval *thread_calculation_block(void *args){
     struct timeval *res = malloc(sizeof(struct timeval));
     gettimeofday(start,NULL);
     int i,j;
-    int x_start = k * ceil(i_width / (1.0*thread_count));
-    int x_end = (k + 1) * ceil(i_width / (1.0*thread_count)) - 1;
+    int x_start =ceil(k * i_width / (1.0*thread_count));
+    int x_end = round((k + 1) * i_width / (1.0*thread_count)) - 1;
     for(i = x_start; i < x_end; i++){
         for(j = 0; j < i_height; j++){
             result[j][i] = abs(calculate_pixel(j, i));
