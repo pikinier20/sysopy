@@ -64,9 +64,9 @@ struct timeval *thread_calculation_block(void *args){
     int i,j;
     int x_start = k * ceil(i_width / (1.0*thread_count));
     int x_end = (k + 1) * ceil(i_width / (1.0*thread_count)) - 1;
-    for(i = x_start; i <= x_end; i++){
+    for(i = x_start; i < x_end; i++){
         for(j = 0; j < i_height; j++){
-            result[i][j] = abs(calculate_pixel(i, j));
+            result[j][i] = abs(calculate_pixel(j, i));
         }
     }
     gettimeofday(end,NULL);
@@ -86,7 +86,7 @@ struct timeval *thread_calculation_interleaved(void *args){
     int i,j;
     for(i = k; i < i_width; i += thread_count){
         for(j = 0; j < i_height; j++){
-            result[i][j] = abs(calculate_pixel(i, j));
+            result[j][i] = abs(calculate_pixel(j, i));
         }
     }
     gettimeofday(end,NULL);
@@ -198,7 +198,6 @@ int main(int argc, char **argv){
     if(file == NULL) FAILURE_EXIT(3, "Error during file opening \n");
     if(load_filter(file) != 0) FAILURE_EXIT(3,"Unsupported file format \n");
     fclose(file);
-
     atexit(on_close);
 
     pthread_t tids[thread_count];
