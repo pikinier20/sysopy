@@ -189,8 +189,8 @@ void *car_function(void *args){
     current_order = (current_order + 1) % car_number;
     pthread_cond_broadcast(car_order_condition);
     pthread_mutex_unlock(car_stop_access_mutex);
-    pthread_mutex_unlock(car_access_mutex);
     working_cars--;
+    pthread_mutex_unlock(car_access_mutex);
     if(working_cars == 0) {
         pthread_cond_broadcast(car_present_condition);
     }
@@ -227,7 +227,7 @@ void *person_function(void *args){
         pthread_mutex_unlock(car_access_mutex);
 
         pthread_mutex_lock(&my_car->access);
-        while((my_car->car_status == 0) || (rand()%100)*same > 50){
+        while((my_car->car_status == 0) && (rand()%100)*same < 50){
             same = 0;
             pthread_cond_wait(&my_car->status,&my_car->access);
         }
@@ -237,7 +237,6 @@ void *person_function(void *args){
             pthread_cond_broadcast(&my_car->status_change);
         }
         pthread_mutex_unlock(&my_car->access);
-
 
         pthread_mutex_lock(&my_car->access);
         while(my_car->car_status == 2){
