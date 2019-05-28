@@ -233,7 +233,7 @@ void *person_function(void *args){
         while(my_car->car_status == 0){
             pthread_cond_wait(&my_car->status,&my_car->access);
         }
-        if(current_car->car_status == 1 && !(&my_car->tries_count--)){
+        if(current_car->car_status == 1 && !(my_car->tries_count--)){
             my_car->car_status = 2;
             log("Person %d clicked start button in car %d \n",i,my_car->order_number);
             pthread_cond_broadcast(&my_car->status_change);
