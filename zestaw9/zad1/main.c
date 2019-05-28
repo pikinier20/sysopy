@@ -25,6 +25,7 @@ typedef struct Car{
     int current_people_number;
     int car_status;
     int run_number;
+    int tries_count;
     pthread_mutex_t access;
     pthread_cond_t status;
     pthread_cond_t status_change;
@@ -161,6 +162,7 @@ void *car_function(void *args){
         while(own->current_people_number != car_capacity){
             pthread_cond_wait(&own->status_change,&own->access);
         }
+        own->tries_count = rand() % car_capacity;
         own->car_status = 1;
         pthread_cond_broadcast(&own->status);
         pthread_mutex_unlock(&own->access);
@@ -200,7 +202,6 @@ void *car_function(void *args){
 
 void *person_function(void *args){
     int i = (int) ((int*)args)[0];
-    int same = 0;
     Car *my_car;
     srand(time(NULL));
     while(working_cars != 0){
@@ -223,18 +224,16 @@ void *person_function(void *args){
 
         if(my_car-> current_people_number == car_capacity){
             pthread_cond_broadcast(&my_car->status_change);
-            same = 1;
         }
         pthread_mutex_unlock(&my_car->access);
 
         pthread_mutex_unlock(car_access_mutex);
 
         pthread_mutex_lock(&my_car->access);
-        while((my_car->car_status == 0) && (rand()%100)*same < 50){
-            same = 0;
+        while(my_car->car_status == 0){
             pthread_cond_wait(&my_car->status,&my_car->access);
         }
-        if(current_car->car_status == 1){
+        if(current_car->car_status == 1 && !(&my_car->tries_count--)){
             my_car->car_status = 2;
             log("Person %d clicked start button in car %d \n",i,my_car->order_number);
             pthread_cond_broadcast(&my_car->status_change);
