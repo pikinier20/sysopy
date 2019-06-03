@@ -214,9 +214,6 @@ void *person_function(void *args){
         }
         my_car = current_car;
         pthread_mutex_lock(&my_car->access);
-        while(current_car->car_status != 0 || current_car->current_people_number == car_capacity){
-            pthread_cond_wait(car_present_condition,&my_car->access);
-        }
 
         my_car->current_people_number++;
         log("Person %d gets in car %d. Currently %d people in car \n",i,my_car->order_number,my_car->current_people_number);
@@ -230,11 +227,11 @@ void *person_function(void *args){
         pthread_mutex_unlock(car_access_mutex);
 
         pthread_mutex_lock(&my_car->access);
-        while((my_car->car_status == 0) && (rand()%100)*same < 50){
-            same = 0;
+        while(my_car->car_status == 0){
             pthread_cond_wait(&my_car->status,&my_car->access);
         }
         if(current_car->car_status == 1){
+            same = 0;
             my_car->car_status = 2;
             log("Person %d clicked start button in car %d \n",i,my_car->order_number);
             pthread_cond_broadcast(&my_car->status_change);
